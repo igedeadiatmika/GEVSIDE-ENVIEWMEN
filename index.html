@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEVSIDE ENVIEWMEN</title>
+    <link rel="icon" type="image/jpeg" href="GEVSIDELOGO.jpeg">
+    <link rel="stylesheet" href="style.css">
+    <style>
+    /* upgrade Responsive Header Styles */
+    html, body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        width: 100vw;
+        overflow-x: hidden;
+    }
+    header {
+        width: 100vw;
+        background: linear-gradient(90deg, #a100ff 0%, #ff005c 50%, #00c3ff 100%);
+        box-shadow: 0 2px 12px #a100ff22;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        /* Gunakan ukuran kecil langsung, tanpa efek shrink */
+        padding: 0.3rem 0 0.1rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        left: 0;
+        right: 0;
+        transition:
+            box-shadow 0.25s cubic-bezier(.4,2,.6,1),
+            background 0.25s cubic-bezier(.4,2,.6,1),
+            opacity 0.35s cubic-bezier(.4,2,.6,1);
+        will-change: box-shadow, background, opacity;
+    }
+    /* Hilangkan efek shrink */
+    header.shrink {
+        /* Tidak ada perubahan dari header */
+        padding: 0.3rem 0 0.1rem 0;
+        box-shadow: 0 2px 18px #a100ff55;
+        background: linear-gradient(90deg, #a100ff 0%, #ff005c 60%, #00c3ff 100%);
+        transition:
+            box-shadow 0.25s cubic-bezier(.4,2,.6,1),
+            background 0.25s cubic-bezier(.4,2,.6,1),
+            opacity 0.35s cubic-bezier(.4,2,.6,1);
+    }
+    header.fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        transition:
+            box-shadow 0.25s cubic-bezier(.4,2,.6,1),
+            background 0.25s cubic-bezier(.4,2,.6,1),
+            opacity 0.35s cubic-bezier(.4,2,.6,1);
+    }
+    header.hide {
+        opacity: 0;
+        pointer-events: none;
+        /* Efek geser ke atas saat menghilang */
+        transform: translateY(-100%);
+        transition:
+            opacity 0.35s cubic-bezier(.4,2,.6,1),
+            transform 0.35s cubic-bezier(.4,2,.6,1);
+    }
+    header:not(.hide) {
+        opacity: 1;
+        transform: translateY(0);
+        transition:
+            opacity 0.35s cubic-bezier(.4,2,.6,1),
+            transform 0.35s cubic-bezier(.4,2,.6,1);
+    }
+    @keyframes headerSlideDown {
+        from { transform: translateY(-100%);}
+        to { transform: translateY(0);}
+    }
+    header h1 {
+        color: #fff;
+        font-size: 1.3rem;
+        margin: 0.1em 0 0.2em 0;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 12px #a100ff55;
+        text-align: center;
+        width: 100%;
+        transition: font-size 0.3s;
+    }
+    /* Hilangkan efek shrink pada h1 */
+    header.shrink h1 {
+        font-size: 1.3rem;
+        margin: 0.1em 0 0.2em 0;
+    }
+    .header-bar {
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 auto;
+    }
+    nav {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 0.5rem;
+        justify-content: center;
+        width: auto;
+        box-sizing: border-box;
+        background: transparent;
+        position: static;
+        padding: 0;
+        transition: padding 0.3s;
+    }
+    header.shrink nav {
+        margin-bottom: 0.1rem;
+    }
+    nav a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 0.5em 1.2em;
+        border-radius: 24px;
+        transition: background 0.2s, color 0.2s;
+        background: rgba(26,0,51,0.15);
+    }
+    nav a:hover, nav a:focus {
+        background: #a100ff;
+        color: #fff;
+        outline: none;
+    }
+    .nav-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        margin-left: 1rem;
+        margin-right: 0;
+        background: none;
+        border: none;
+    }
+    .nav-toggle span {
+        display: block;
+        width: 28px;
+        height: 4px;
+        background: #fff;
+        margin: 4px 0;
+        border-radius: 2px;
+        transition: 0.3s;
+    }
+    @media (max-width: 700px) {
+        header {
+            padding: 0.2rem 0 0.1rem 0;
+            width: 100vw;
+            left: 0;
+            right: 0;
+        }
+        header.shrink {
+            padding: 0.2rem 0 0.1rem 0;
+        }
+        .header-bar {
+            flex-direction: row;
+            width: 100vw;
+            max-width: 100vw;
+            padding: 0 0.5rem;
+        }
+        header h1 {
+            font-size: 1rem;
+        }
+        header.shrink h1 {
+            font-size: 1rem;
+        }
+        nav {
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 100vw;
+            min-width: 0;
+            max-width: 100vw;
+            align-items: flex-start;
+            background: linear-gradient(90deg, #a100ff 0%, #ff005c 50%, #00c3ff 100%);
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 60px;
+            padding: 0.7rem 1.2rem 1rem 1.2rem;
+            box-shadow: 0 2px 12px #a100ff22;
+            display: none;
+            z-index: 200;
+        }
+        nav.open {
+            display: flex;
+        }
+        .nav-toggle {
+            display: flex;
+        }
+    }
+    @media (max-width: 400px) {
+        header h1 {
+            font-size: 1rem;
+        }
+        nav a {
+            font-size: 0.95rem;
+            padding: 0.4em 0.7em;
+        }
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bar">
+            <h1>GEVSIDE enviewmen</h1>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <nav id="mainNav">
+            <a href="#discoveries">Penemuan</a>
+            <a href="#chat">Chat</a>
+            <a href="#about">Tentang</a>
+        </nav>
+    </header>
+    <section id="techShowcase">
+        <div class="showcase-row">
+            <div class="showcase-card" tabindex="0" data-index="0">
+                <div class="showcase-media">
+                    <video src="vidio1.mp4" controls poster="https://images.unsplash.com/photo-1667314092420-0c09ef21060f?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></video>
+                </div>
+                <div class="showcase-title">Dokumentasi kelas 9</div>
+                <button class="showcase-more">Lebih Lengkap</button>
+                <div class="showcase-detail">
+                    <p>Vidio ini di buat sebagai sebuah rangkuman kegiatan yang terabadikan oleh teknologi yang berkembang pesat pada abad 20.
+                        Vidio ini berdurasi singkat namun memiliki ikatan memori yang sangat berarti bagi sang pembuatnya.
+                    </p>
+                </div>
+            </div>
+            <div class="showcase-card" tabindex="0" data-index="1">
+                <div class="showcase-media">
+                    <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls poster="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80"></video>
+                </div>
+                <div class="showcase-title">Teknologi Animasi</div>
+                <button class="showcase-more">Lebih Lengkap</button>
+                <div class="showcase-detail">
+                    <p>Animasi kartun yang dikembangkan oleh kemajuan teknologi AI kami, dengan menggunakan banyak eksperiment dalam sistem tersebut</p>
+                </div>
+            </div>
+            <div class="showcase-card" tabindex="0" data-index="2">
+                <div class="showcase-media">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Energi Terbarukan">
+                </div>
+                <div class="showcase-title">peduli terhadap lingkungan</div>
+                <button class="showcase-more">Lebih Lengkap</button>
+                <div class="showcase-detail">
+                    <p>Kami memiliki visi dan misi untuk menjadikan teknologi agar dapat diandalkan dalam menghadapi permasalahan lingkungan.
+                        Bergabunglah bersama komunitas kami dan menjadi bagian dari perubahan positif untuk lingkungan.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <main>
+        <!-- Voice Note AI Section -->
+        <section id="voiceNoteAISection" style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin:2rem 0 1.5rem 0;">
+            <div style="background:rgba(26,0,51,0.18);border-radius:18px;padding:1.2rem 2rem;box-shadow:0 2px 16px #a100ff33;max-width:480px;width:100%;display:flex;flex-direction:column;align-items:center;">
+                <h3 style="color:#00c3ff;margin-bottom:0.7rem;text-align:center;">Voice Note AI</h3>
+                <div style="font-size:0.97em;color:#fff;background:rgba(0,0,0,0.09);border-radius:8px;padding:0.7em 1em;margin-bottom:1em;text-align:center;">
+                    <b>Fitur Voice Note AI:</b><br>
+                    <ul style="text-align:left;margin:0.5em 0 0.5em 1.2em;padding:0;">
+                        <li>Rekam suara (maks. 15 detik, 1MB), otomatis transkripsi & translate ke Indonesia.</li>
+                        <li>AI akan langsung menjawab pertanyaan atau curhatan Anda dengan karakter virtual dan suara AI.</li>
+                        <li>Pilih gaya suara AI: netral, perempuan, laki-laki, enerjik, atau tenang.</li>
+                        <li>Riwayat voice note dan jawaban AI dapat diputar ulang.</li>
+                        <li>Dukungan multi-bahasa (deteksi otomatis), multi-turn (AI mengingat percakapan VN sebelumnya).</li>
+                        <li>Fitur ini masih dalam pengembangan, akurasi optimal hingga <b>90%</b> (tergantung kualitas suara & jaringan).</li>
+                        <li>Untuk hasil terbaik, gunakan suara jelas dan jaringan stabil.</li>
+                    </ul>
+                    <span style="color:#ff005c;font-size:0.95em;">* Fitur ini menggunakan AI speech-to-text, AI chat, translate, dan text-to-speech secara otomatis.</span>
+                </div>
+                <div style="display:flex;gap:0.7rem;align-items:center;justify-content:center;margin-bottom:0.7rem;">
+                    <button id="vnRecordBtn" style="background:#a100ff;color:#fff;border:none;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;box-shadow:0 2px 8px #a100ff44;cursor:pointer;" title="Rekam Voice Note">
+                        <span id="vnMicIcon">🎤</span>
+                    </button>
+                    <select id="vnVoiceStyle" style="border-radius:8px;padding:0.3em 0.7em;font-size:1rem;">
+                        <option value="default">AI introvet</option>
+                        <option value="female">AI penyayang</option>
+                        <option value="male">AI bijaksana</option>
+                        <option value="energetic">AI penyemangat</option>
+                        <option value="calm">AI kalem</option>
+                    </select>
+                </div>
+                <div id="vnStatus" style="color:#ff005c;font-size:0.98rem;min-height:1.5em;text-align:center;"></div>
+                <audio id="vnPlayback" controls style="display:none;width:100%;margin-top:0.7rem;"></audio>
+                <div id="vnAIResponse" style="margin-top:1.2rem;width:100%;display:none;">
+                    <div style="color:#00c3ff;font-weight:600;margin-bottom:0.3em;">Jawaban AI:</div>
+                    <div id="vnAIResponseText" style="color:#fff;"></div>
+                    <audio id="vnAIResponseAudio" controls style="width:100%;margin-top:0.5em;"></audio>
+                </div>
+                <div style="font-size:0.9em;color:#aaa;margin-top:0.7em;text-align:center;">
+                    Maks. 15 detik, 1MB. Otomatis translate & jawab dengan suara AI.
+                </div>
+            </div>
+        </section>
+        <section id="discoveriesSection">
+            <form id="postForm" enctype="multipart/form-data">
+                <input type="text" id="discoveryName" placeholder="Nama Penemuan" required>
+                <input type="text" id="author" placeholder="Nama Kamu (opsional)">
+                <textarea id="content" placeholder="Bagikan penemuan teknologi Kamu..." required></textarea>
+                <input type="file" id="media" accept="image/*,video/*">
+                <button type="submit">Posting Penemuan</button>
+            </form>
+            <div id="searchBar">
+                <input type="text" id="searchInput" placeholder="Cari berdasarkan nama penemuan Dia...">
+                <button id="searchBtn">Cari</button>
+            </div>
+            <div id="searchResults"></div>
+            <div id="discoveries" class="live-feed"></div>
+        </section>
+        <section id="chat">
+            <h2>Chat sama orang gabut</h2>
+            <div id="chatMessages"></div>
+            <div id="chatInput">
+                <input type="text" id="chatUser" placeholder="Nama Kamu">
+                <input type="text" id="chatText" placeholder="Ketik pesan...">
+                <button id="chatSend">Kirim</button>
+            </div>
+            <hr>
+            <h2>Chatan bareng AI buatan Igede</h2>
+            <div id="aiChatMessages"></div>
+            <div id="aiChatInput">
+                <input type="text" id="aiChatUser" placeholder="Nama Kamu">
+                <input type="text" id="aiChatText" placeholder="Tanya AI...">
+                <button id="aiChatSend">Kirim ke AI</button>
+            </div>
+        </section>
+        <section id="about" style="margin-top:3rem;">
+            <h2>Tentang GEVSIDE ENVIEWMEN</h2>
+            <!-- Tambahkan gambar di atas kiri tulisan -->
+            <div style="display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:1.5rem;">
+                <img src="GEVSIDELOGO.jpeg"
+                     alt="Tentang GEVSIDE" style="width:280px;height:280px;object-fit:cover;border-radius:16px;box-shadow:0 0 18px #a100ff77;border:3px solid #a100ff;background:#1a0033;">
+                <div style="flex:1;">
+                    <div id="aboutVisual" style="text-align:center;margin-bottom:2rem;">
+                        <svg width="320" height="120" viewBox="0 0 320 120">
+                            <defs>
+                                <linearGradient id="neonGradient" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#a100ff"/>
+                                    <stop offset="50%" stop-color="#ff005c"/>
+                                    <stop offset="100%" stop-color="#00c3ff"/>
+                                </linearGradient>
+                                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                                    <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                            <ellipse cx="160" cy="60" rx="120" ry="40" fill="url(#neonGradient)" filter="url(#glow)" opacity="0.7"/>
+                            <text x="50%" y="50%" text-anchor="middle" fill="#fff" font-size="32" font-family="Segoe UI" dy=".3em" filter="url(#glow)">GEVSIDE</text>
+                        </svg>
+                    </div>
+                        <p>
+                      Platform ini dikembangkan dengan tujuan yang sangat mulia.
+                      Kami memiliki visi dan misi 
+                      yang bertujuan untuk mengembangkan sumberdaya manusia yang mampu berkontribusi terhadap kemajuan teknologi.
+                      sebuah arah baru menuju lingkungan hijau yang dibentuk oleh inovasi teknologi dan visi masa depan
+                     <p>(GEVSIDE) Green evolution side</p>
+                        </p>(ENVIEWMEN) Environment View Envision</p>
+                      
+                      <p style="color: #a100ff;">"Green Vision, Smart Future"</p>
+                      </p>
+                    
+                </div>
+            </div>
+            <h3 style="color:#a100ff;margin-top:2rem;">Sejarah Web</h3>
+            <div id="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2025-06</span>
+                        <span class="timeline-title">Konsep Awal</span>
+                        <span class="timeline-desc">GEVSIDE enviewmen lahir dari ide seorang pelajar bernama I GEDE ADIATMIKA.
+                             Ia terus belajar demi mewujudkan harapannya untuk menjadi developer teknologi terbaik di Indonesia.</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2025-06</span>
+                        <span class="timeline-title">Pengembangan Fitur Inti</span>
+                        <span class="timeline-desc">Kami menambahkan beberapa fitur canggih dari beberapa experiment yang kami lakukan</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2025-07</span>
+                        <span class="timeline-title">Integrasi AI & Kolaborasi</span>
+                        <span class="timeline-desc">Fitur chat AI dan kolaborasi developer sedang di kembangkan</span>
+                    </div>
+                </div>
+            </div>
+            <h3 style="color:#00c3ff;margin-top:2rem;">Kolaborasi Developer</h3>
+            <div id="devCards">
+                <!-- Kartu developer statis dipindahkan ke JavaScript agar tidak dobel dengan renderDevCollaborators -->
+                <form id="devForm" class="dev-card dev-form-card">
+                    <div class="dev-info">
+                        <input type="text" id="devName" placeholder="Nama Developer" required>
+                        <input type="text" id="devRole" placeholder="Peran/Kontribusi" required>
+                        <input type="text" id="devContact" placeholder="Akun Instagram (tanpa @, misal: username)" required>
+                        <button type="submit">Tambah Kolaborator</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <!-- Footer Start -->
+    <footer class="site-footer">
+        <div class="footer-main">
+            <div class="footer-brand">
+                <img src="GEVSIDELOGO.jpeg" alt="GEVSIDE Logo" class="footer-logo">
+                <div>
+                    <h2>GEVSIDE ENVIEWMEN</h2>
+                    <p class="footer-tagline">Green Vision, Smart Future</p>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div>
+                    <h4>Menu</h4>
+                    <ul>
+                        <li><a href="#discoveries">Penemuan</a></li>
+                        <li><a href="#chat">Chat</a></li>
+                        <li><a href="#about">Tentang</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Kontak</h4>
+                    <ul>
+                        <li>WhatsApp: <a href="https://wa.me/087728639990" target="_blank">chatan sama Developernya sini</a></li>
+                        <li>Instagram: <a href="https://www.instagram.com/igd_zjz?igsh=MTExdmVmcWhtMW1qdA==" target="_blank" rel="noopener noreferrer">@igd_zjz</a></li>
+                        <li>Alamat: Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Developer</h4>
+                    <ul>
+                        <li>I GEDE ADIATMIKA</li>
+                        <li>Kontributor: <a href="https://github.com/gevside" target="_blank" rel="noopener noreferrer">github.com/gevside</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2025 GEVSIDE enviewmen. All rights reserved.</span>
+            <span>Made with <span style="color:#ff005c;">&#10084;</span> by GEVSIDE Developer</span>
+        </div>
+    </footer>
+    <!-- Footer End -->
+    <script type="module" src="script.js"></script>
+    <script>
+    // Responsive nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const mainNav = document.getElementById('mainNav');
+    function closeNavOnClickOutside(e) {
+        if (!mainNav.contains(e.target) && !navToggle.contains(e.target)) {
+            mainNav.classList.remove('open');
+        }
+    }
+    navToggle?.addEventListener('click', () => {
+        mainNav.classList.toggle('open');
+    });
+    navToggle?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            mainNav.classList.toggle('open');
+        }
+    });
+    document.addEventListener('click', closeNavOnClickOutside);
+    mainNav?.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => mainNav.classList.remove('open'));
+    });
+
+    // Header shrink, fixed, and hide on scroll
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+    const header = document.querySelector('header');
+    let lastDirection = 'up';
+    let hideTimeout = null;
+
+    function onScroll() {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        // Shrink
+        if (scrollY > 30) {
+            header.classList.add('shrink');
+        } else {
+            header.classList.remove('shrink');
+        }
+        // Fixed
+        if (scrollY > 120) {
+            header.classList.add('fixed');
+        } else {
+            header.classList.remove('fixed');
+        }
+        // Hide on scroll down, show on scroll up
+        if (scrollY > 80) {
+            if (scrollY > lastScrollY) {
+                // Scrolling down
+                if (lastDirection !== 'down') {
+                    header.classList.add('hide');
+                    lastDirection = 'down';
+                }
+                    } else {
+                // Scrolling up
+                if (lastDirection !== 'up') {
+                    header.classList.remove('hide');
+                    lastDirection = 'up';
+                }
+            }
+        } else {
+            header.classList.remove('hide');
+            lastDirection = 'up';
+        }
+        lastScrollY = scrollY;
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+    window.addEventListener('scroll', onScroll);
+    </script>
+</body>
+</html>
