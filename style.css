@@ -683,6 +683,7 @@ main {
     justify-content: center;
     align-items: stretch;
     flex-wrap: wrap;
+    overflow: hidden;
 }
 .showcase-card {
     background: rgba(26,0,51,0.8);
