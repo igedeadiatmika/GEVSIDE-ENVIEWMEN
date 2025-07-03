@@ -1,4 +1,8 @@
 /* Neon purple, red, blue theme */
+* {
+    outline: 1px dashed re;
+} 
+
 body {
     background: linear-gradient(135deg, #1a0033 0%, #330033 50%, #001a33 100%);
     color: #fff;
