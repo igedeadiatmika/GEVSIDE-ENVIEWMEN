@@ -296,6 +296,11 @@ function renderDevCollaborators() {
 // Knowledge base AI diperluas untuk ratusan pertanyaan pengetahuan umum dari berbagai cabang ilmu
 const aiKnowledgeBase = {
     // Tanya jawab ringan medsos
+    "kenapa bumi itu bulat": "Karena adanya gaya gravitasi yang menarik semua massa benda ke arah pusat.",
+    "Bumi bulat atau datar": "menurut perhitungan dan pengkajian secara ilmiah. Bumi itu bulat.",
+    "Bumi datar atau bulat": "menurut perhitungan dan pengkajian secara ilmiah. Bumi itu bulat.",
+    "apakah bumi itu datar": "menurut perhitungan dan pengkajian secara ilmiah. Bumi itu bulat.",
+    "apakah bumi itu bulat": "Tentuu, menurut perhitungan dan pengkajian secara ilmiah. Bumi itu bulat.",
     "siapa yang menciptakan ini": "Saya di ciptakan oleh pelajar yang sangat ahli dalam bidang IT. Beliau adalah IGEDE ADIATMIKA.",
     "siapa yang menciptakan anda": "i gede adiatmika yang menciptakan saya seorang diri, ia menggunakan berbagai experiment dan pendalaman mekanis sistem saya secara mendalam.",
     "Siapa yang menciptakan anda": "i gede adiatmika yang menciptakan saya seorang diri, ia menggunakan berbagai experiment dan pendalaman mekanis sistem saya secara mendalam.",
