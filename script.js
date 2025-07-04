@@ -296,6 +296,7 @@ function renderDevCollaborators() {
 // Knowledge base AI diperluas untuk ratusan pertanyaan pengetahuan umum dari berbagai cabang ilmu
 const aiKnowledgeBase = {
     // Tanya jawab ringan medsos
+    "siapa yang menciptakan ini": "Saya di ciptakan oleh pelajar yang sangat ahli dalam bidang IT. Beliau adalah IGEDE ADIATMIKA.",
     "siapa yang menciptakan anda": "i gede adiatmika yang menciptakan saya seorang diri, ia menggunakan berbagai experiment dan pendalaman mekanis sistem saya secara mendalam.",
     "Siapa yang menciptakan anda": "i gede adiatmika yang menciptakan saya seorang diri, ia menggunakan berbagai experiment dan pendalaman mekanis sistem saya secara mendalam.",
     "kenapa followers turun": "Followers bisa turun karena akun tidak aktif, konten kurang menarik, atau ada yang menghapus/memblokir akun.",
