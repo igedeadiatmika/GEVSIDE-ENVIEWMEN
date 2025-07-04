@@ -1883,3 +1883,31 @@ function stopVNRecording() {
         if (vnTimeout) clearTimeout(vnTimeout);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ function copyVideoLink(videoId) {
+    const baseUrl = window.location.href.split('#')[0]; // Hapus hash jika ada
+    const link = ${baseUrl}#${videoId};
+
+    navigator.clipboard.writeText(link)
+      .then(() => {
+        const status = document.querySelector(#${videoId}).closest('.video-card').querySelector('.copy-status');
+        status.textContent = "✔️ Link disalin!";
+        setTimeout(() => status.textContent = "", 3000);
+      })
+      .catch(() => alert("Gagal menyalin link"));
+  }
